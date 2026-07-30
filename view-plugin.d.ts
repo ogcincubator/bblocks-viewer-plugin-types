@@ -92,8 +92,8 @@ export interface ViewPluginClass {
    * before instantiation. Supports wildcards ('text/*', '*\/*'). Required — a plugin with no
    * overlapping type is never instantiated. */
   supportedTypes: string[];
-  /** Tab label. Falls back to the class name if omitted. */
-  viewName?: string;
+  /** Tab label. Required — also used to generate the tab's shareable link. */
+  viewName: string;
   /** MDI icon name (e.g. 'mdi-map') for the tab. Falls back to 'mdi-puzzle-outline' if omitted. */
   icon?: string;
 }
