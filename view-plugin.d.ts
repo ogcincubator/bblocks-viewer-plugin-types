@@ -84,6 +84,16 @@ export interface ViewPluginInstance {
   destroy?(el: HTMLElement): void;
 }
 
+/** A tab/button icon: either an MDI icon-class string (the existing/default form, resolved via
+ * Vuetify's icon-set lookup), or an image URL (PNG, JPG, or SVG) rendered as a plain `<img>`.
+ * Deliberately does not support a Vue component or raw inline SVG markup/path data — a plugin
+ * bundles its own Vue copy, which the host cannot safely render, and an author wanting a custom
+ * vector icon can already host an `.svg` file and use the `{ url }` form. Use an absolute URL:
+ * a relative one resolves against the *viewer's own* page origin, not the plugin's. */
+export type PluginIcon =
+  | string
+  | { url: string };
+
 /** The class a plugin module exports (default or named) — constructed fresh per matching
  * candidate set, never reused across examples/transform-outputs. */
 export interface ViewPluginClass {
@@ -94,6 +104,7 @@ export interface ViewPluginClass {
   supportedTypes: string[];
   /** Tab label. Required — also used to generate the tab's shareable link. */
   viewName: string;
-  /** MDI icon name (e.g. 'mdi-map') for the tab. Falls back to 'mdi-puzzle-outline' if omitted. */
-  icon?: string;
+  /** Icon for the tab: an MDI icon-class string, or `{ url }` for a custom image. Falls back to
+   * 'mdi-puzzle-outline' if omitted. */
+  icon?: PluginIcon;
 }

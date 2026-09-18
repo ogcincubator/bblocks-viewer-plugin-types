@@ -13,7 +13,7 @@
 //
 // Usage is identical to the view-plugin contract — see this package's README.
 
-import type {DependencyResolver} from './view-plugin';
+import type {DependencyResolver, PluginIcon} from './view-plugin';
 
 /** Host information passed as the constructor's only argument. Always supplied by bblocks-viewer.
  * Unlike ViewPluginContext, this carries the full bblock and register objects directly (there's
@@ -79,9 +79,9 @@ export interface TabPluginClass {
   /** v-tab display text. Required — a plugin missing this is skipped entirely (logged), since
    * there's no sensible placeholder for user-facing text. */
   tabLabel: string;
-  /** MDI icon name (e.g. 'mdi-puzzle-outline') for the tab. Falls back to 'mdi-puzzle-outline' if
-   * omitted. */
-  icon?: string;
+  /** Icon for the tab: an MDI icon-class string, or `{ url }` for a custom image. Falls back to
+   * 'mdi-puzzle-outline' if omitted. */
+  icon?: PluginIcon;
   /** Ordering among other matched tab plugins for the same bblock (not relative to the fixed
    * built-in tabs, which this mechanism always renders after). Higher sorts first. Default 0. */
   weight?: number;
